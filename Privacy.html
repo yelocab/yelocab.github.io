@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+        <style>
+        body, p, label {
+        font-family:Arial, sans-serif;
+        color: #2e2e38;
+        font-size:14px;
+        }
+        
+        p {
+        margin:0px;
+        padding: 0px;
+        margin-bottom:8px;
+        }
+        
+        #cs-privacy-box {
+        border: 1px solid #c4c4cd;
+        padding:12px;}
+        
+        </style>
+    </head>
+    <body>
+    
+  
+        <div id="cs-privacy-box">
+           
+            <span id="labelText"></span>
+         <p>Please review our <a href='' target='_blank'>privacy statement</a> which covers this form you are submitting and how we handle your data.</p>
+            <input type="checkbox" name="privacy" id="cs-privacy" value="Yes" required><label for="cs-privacy"> I agree to the privacy statement.&nbsp;<span style="color:red">*</span></label>
+        </div>
+        <script type="text/javascript">
+         
+            //always subscribe to ready event and implement widget related code
+            //inside callback function , it is the best practice while developing widgets
+            JFCustomWidget.subscribe("ready", function(){
+                var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
+                document.getElementById('labelText').innerHTML = label;
+                //subscribe to form submit event
+                JFCustomWidget.subscribe("submit", function(){
+                    var msg = {
+                        //you should valid attribute to data for JotForm
+                        //to be able to use youw widget as required
+                        valid: true,
+                        value: document.getElementById('cs-privacy').value
+                    }
+                    // send value to JotForm
+                    JFCustomWidget.sendSubmit(msg);
+                });
+            });
+          
+           
+        </script>
+    </body>
+</html>
+
+
